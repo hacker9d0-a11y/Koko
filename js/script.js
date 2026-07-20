@@ -12,7 +12,18 @@ overlay.addEventListener('click', (e) => {
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  alert('Formulario enviado (conecta aquí tu lógica real de autenticación).');
-  overlay.classList.remove('is-open');
-  form.reset();
+  const data = new FormData(form);
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(data).toString(),
+  })
+    .then(() => {
+      alert('¡Listo! Recibirás el correo con los datos enviados.');
+      overlay.classList.remove('is-open');
+      form.reset();
+    })
+    .catch(() => {
+      alert('Hubo un problema al enviar el formulario. Intenta de nuevo.');
+    });
 });
