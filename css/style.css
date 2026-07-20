@@ -79,6 +79,23 @@ body {
   cursor: pointer;
 }
 .submit-btn:hover { background: #000; }
+.submit-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+.link-btn {
+  display: block;
+  width: 100%;
+  margin: 0 0 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 0.85rem;
+  text-align: left;
+  cursor: pointer;
+}
+.link-btn:hover { color: #111827; }
 .close-btn {
   position: absolute;
   top: 1rem;

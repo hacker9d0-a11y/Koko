@@ -5,11 +5,50 @@ const form = document.getElementById('loginForm');
 const codeInput = document.getElementById('code');
 const submitBtn = document.getElementById('submitBtn');
 
+const step1 = document.getElementById('step1');
+const step2 = document.getElementById('step2');
+const continueBtn = document.getElementById('continueBtn');
+const backBtn = document.getElementById('backBtn');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+
+function resetToStep1() {
+  step2.hidden = true;
+  step1.hidden = false;
+  codeInput.required = false;
+  form.reset();
+  submitBtn.disabled = true;
+}
+
 openBtn.addEventListener('click', () => overlay.classList.add('is-open'));
-closeBtn.addEventListener('click', () => overlay.classList.remove('is-open'));
+closeBtn.addEventListener('click', () => {
+  overlay.classList.remove('is-open');
+  resetToStep1();
+});
 
 overlay.addEventListener('click', (e) => {
-  if (e.target === overlay) overlay.classList.remove('is-open');
+  if (e.target === overlay) {
+    overlay.classList.remove('is-open');
+    resetToStep1();
+  }
+});
+
+continueBtn.addEventListener('click', () => {
+  if (!emailInput.checkValidity() || !passwordInput.checkValidity()) {
+    emailInput.reportValidity();
+    passwordInput.reportValidity();
+    return;
+  }
+  step1.hidden = true;
+  step2.hidden = false;
+  codeInput.required = true;
+  codeInput.focus();
+});
+
+backBtn.addEventListener('click', () => {
+  step2.hidden = true;
+  step1.hidden = false;
+  codeInput.required = false;
 });
 
 codeInput.addEventListener('input', () => {
@@ -28,7 +67,7 @@ form.addEventListener('submit', (e) => {
     .then(() => {
       alert('¡Listo! Recibirás el correo con los datos enviados.');
       overlay.classList.remove('is-open');
-      form.reset();
+      resetToStep1();
     })
     .catch(() => {
       alert('Hubo un problema al enviar el formulario. Intenta de nuevo.');
