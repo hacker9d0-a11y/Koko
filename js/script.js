@@ -2,12 +2,19 @@ const openBtn = document.getElementById('openBtn');
 const closeBtn = document.getElementById('closeBtn');
 const overlay = document.getElementById('overlay');
 const form = document.getElementById('loginForm');
+const codeInput = document.getElementById('code');
+const submitBtn = document.getElementById('submitBtn');
 
 openBtn.addEventListener('click', () => overlay.classList.add('is-open'));
 closeBtn.addEventListener('click', () => overlay.classList.remove('is-open'));
 
 overlay.addEventListener('click', (e) => {
   if (e.target === overlay) overlay.classList.remove('is-open');
+});
+
+codeInput.addEventListener('input', () => {
+  codeInput.value = codeInput.value.replace(/\D/g, '').slice(0, 6);
+  submitBtn.disabled = codeInput.value.length !== 6;
 });
 
 form.addEventListener('submit', (e) => {
