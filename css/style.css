@@ -106,3 +106,5 @@ body {
   color: #6b7280;
   cursor: pointer;
 }
+body { background: transparent !important; }
+
